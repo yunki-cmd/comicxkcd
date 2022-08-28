@@ -1,17 +1,19 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 const fs = require('fs/promises');
+const path = require('path');
 
 
 export default async function paginastiones(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  path.resolve(process.cwd(), "comicsJson")
   let { pagination } = req.query
   if (typeof pagination !== 'number' && pagination !== undefined) {
     pagination = parseInt(pagination)
   }
-  if (pagination) {    
+  if (pagination) {
     const comics = await fs.readdir(process.cwd() + "/comicsJson")
     let finalPages = comics.length - (pagination - 10)
     if (finalPages <= 0) return res.status(204).end()
