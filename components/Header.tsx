@@ -42,8 +42,10 @@ const Header: NextPage = () => {
     <header className="flex flex-row justify-between m-10">
       <div>
         <Link href={"/"}>
+          <a href={"/"}>
             <span className="font-bold">next</span>
             <span className="font-light text-sm cursor-pointer">xkcd</span>
+          </a>
         </Link>
         <div className="flex items-center justify-center w-full mb-12">
           <label htmlFor="toogleA"
