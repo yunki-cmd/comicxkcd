@@ -46,7 +46,7 @@ const ComicHome: NextPage<propsComics> = ({ latestComics }) => {
   }
 
   const handlerLoadingMore = () => {
-    fetch(`http://localhost:3000/api/pagination?pagination=${page.current}`)
+    fetch(`/api/pagination?pagination=${page.current}`)
       .then(resp => resp.json())
       .then(resp => {
         resp.forEach((element: content) => {
@@ -85,7 +85,7 @@ const ComicHome: NextPage<propsComics> = ({ latestComics }) => {
   const handlerInfiniteScroll = debounce((entries: any) => {
     const [entry] = entries
     if (entry.isIntersecting) {      
-      fetch(`http://localhost:3000/api/pagination?pagination=${page.current}`)
+      fetch(`/api/pagination?pagination=${page.current}`)
         .then(resp => resp.json())
         .then(resp => {
           resp.forEach((element: content) => {
