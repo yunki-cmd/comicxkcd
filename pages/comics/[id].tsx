@@ -1,7 +1,6 @@
 import { NextPage } from "next"
 import { GetServerSideProps } from 'next'
 import Head from "next/head"
-import Header from "../../components/Header"
 import { readFile, stat} from "fs/promises"
 import Link from "next/link"
 import Layout from "../../components/Layout"
@@ -62,12 +61,12 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
   console.log(process.cwd())
-  const file = await readFile(`${process.cwd()}/comics/${id}.json`, "utf-8")
+  const file = await readFile(`${process.cwd()}/comicsJson/${id}.json`, "utf-8")
   const content = await JSON.parse(file)
   const idNumber = +id
   const prevID = idNumber - 1
   const nextId = idNumber + 1
-  const [hasPrevPage, hasNextPage] = await Promise.allSettled([stat(`${process.cwd()}/comics/${prevID}.json`),stat(`${process.cwd() }/comics/${nextId}.json`)])
+  const [hasPrevPage, hasNextPage] = await Promise.allSettled([stat(`${process.cwd()}/comicsJson/${prevID}.json`),stat(`${process.cwd() }/comicsJson/${nextId}.json`)])
   const { status:PrevPage } = hasPrevPage
   const { status:nextPage} = hasNextPage
   return {
