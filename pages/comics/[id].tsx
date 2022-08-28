@@ -61,12 +61,12 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
-  const file = await readFile(`./comics/${id}.json`, "utf-8")
+  const file = await readFile(`./public/comics/${id}.json`, "utf-8")
   const content = await JSON.parse(file)
   const idNumber = +id
   const prevID = idNumber - 1
   const nextId = idNumber + 1
-  const [hasPrevPage, hasNextPage] = await Promise.allSettled([stat(`./comics/${prevID}.json`),stat(`./comics/${nextId}.json`)])
+  const [hasPrevPage, hasNextPage] = await Promise.allSettled([stat(`./public/comics/${prevID}.json`),stat(`./public/comics/${nextId}.json`)])
   const { status:PrevPage } = hasPrevPage
   const { status:nextPage} = hasNextPage
   return {
