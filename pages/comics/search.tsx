@@ -13,7 +13,6 @@ const Search: NextPage = ({q}) => {
 
 export async function getServerSideProps(context) {
   const { q: query = "" } = context.query
-  console.log("query " + query)
   const { hits } = await searchAlgoria({query})
   return {
     props: {
