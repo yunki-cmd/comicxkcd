@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import ComicHome from '../components/ComicHome'
 import fs from 'fs/promises'
 import Layout from '../components/Layout'
-
+import path from "path"
 
 const Home: NextPage = ({ latestComics } ) => {
 
@@ -17,10 +17,10 @@ const Home: NextPage = ({ latestComics } ) => {
 }
 
 export async function getServerSideProps() {
-  const comics = await fs.readdir("./public/comics")
+  const comics = await fs.readdir(process.cwd() + "/public/comics")
   const lastComics = comics.slice(-10, comics.length).reverse()
   const promiseReadFiles = lastComics.map(async (file) => {
-    const content = await JSON.parse((await fs.readFile(`./public/comics/${file}`, 'utf-8')).toString())
+    const content = await JSON.parse((await fs.readFile(`${process.cwd()}/public/comics/${file}`, 'utf-8')).toString())
     return { content }
   })
   const latestComics = await Promise.all(promiseReadFiles)

@@ -61,7 +61,7 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
-  const file = await readFile(`./public/comics/${id}.json`, "utf-8")
+  const file = await readFile(`${ process.cwd() }/public/comics/${id}.json`, "utf-8")
   const content = await JSON.parse(file)
   const idNumber = +id
   const prevID = idNumber - 1
