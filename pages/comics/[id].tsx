@@ -4,6 +4,7 @@ import Head from "next/head"
 import { readFile, stat} from "fs/promises"
 import Link from "next/link"
 import Layout from "../../components/Layout"
+import Footer from "../../components/footer"
 
 interface Props{
   id: string
@@ -36,7 +37,7 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col justify-center items-center mt-24">
+        <div className="flex flex-col justify-start items-center mt-24 min-h-screen">
           <img src={content.img} alt={content.alt} />
           <div className="w-1/2 mt-12 flex flex-row justify-evenly gap-10">
             {PrevPage === 'fulfilled' &&
@@ -51,6 +52,7 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
             }
           </div>
         </div>
+        <Footer></Footer>
       </Layout>
 
     </>
@@ -60,7 +62,6 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
-  console.log(process.cwd())
   const file = await readFile(`${process.cwd()}/comicsJson/${id}.json`, "utf-8")
   const content = await JSON.parse(file)
   const idNumber = +id

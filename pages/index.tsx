@@ -3,13 +3,15 @@ import ComicHome from '../components/ComicHome'
 import fs from 'fs/promises'
 import Layout from '../components/Layout'
 import path from "path"
+import Footer from '../components/footer'
 
 const Home: NextPage = ({ latestComics } ) => {
 
   return (
     <>
       <Layout>
-        <ComicHome latestComics={latestComics}  />
+        <ComicHome latestComics={latestComics} />
+        <Footer></Footer>
       </Layout>
     </>
   )
@@ -18,10 +20,11 @@ const Home: NextPage = ({ latestComics } ) => {
 
 export async function getServerSideProps() {
   path.resolve(process.cwd(), "comicsJson")
-  const comics = await fs.readdir(process.cwd() + "/comicsJson")
-  const lastComics = comics.slice(-10, comics.length).reverse()
+  const comics = await (await fs.readdir(process.cwd() + "/comicsJson"))
+  const baseName = comics.map( element => element.split(".")[0]).sort((a, b) => a - b)
+  const lastComics = baseName.slice(-10, comics.length).reverse()
   const promiseReadFiles = lastComics.map(async (file) => {
-    const content = await JSON.parse((await fs.readFile(`${process.cwd()}/comicsJson/${file}`, 'utf-8')).toString())
+    const content = await JSON.parse((await fs.readFile(`${process.cwd()}/comicsJson/${file}.json`, 'utf-8')).toString())
     return { content }
   })
   const latestComics = await Promise.all(promiseReadFiles)

@@ -40,23 +40,25 @@ const Header: NextPage = () => {
 
   return (
     <header className="flex flex-row justify-between m-10">
-      <div>
+      <div className="flex flex-row justify-center">
         <Link href={"/"}>
           <a href={"/"}>
             <span className="font-bold">next</span>
             <span className="font-light text-sm cursor-pointer">xkcd</span>
           </a>
         </Link>
-        <div className="flex items-center justify-center w-full mb-12">
-          <label htmlFor="toogleA"
-            className="flex items-center cursor-pointer">
+        <div className="flex items-center justify-center content-center w-full">
+          <label htmlFor="toogleA" className="flex items-center cursor-pointer">
+            <div className="ml-3 text-gray-700 text-sm mr-3 capitalize">
+              pagination
+            </div>
             <div className="relative">
               <input onChange={handlerCheckBox} id="toogleA" type="checkbox" className="sr-only" checked={ infiniteScroll} />
-              <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-              <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+              <div className="w-5 h-2 bg-gray-400 rounded-full shadow-inner"></div>
+              <div className="dot absolute w-3 h-3 bg-white rounded-full shadow -left-1 -top-[3px] transition"></div>
             </div>
-            <div className="ml-3 text-gray-700 font-medium">
-              Toggle Me!
+            <div className="ml-3 text-gray-700 text-sm capitalize">
+              infinite scroll
             </div>
           </label>
         </div>
