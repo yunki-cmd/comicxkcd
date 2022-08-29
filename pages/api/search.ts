@@ -2,9 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { searchAlgoria } from "../../services/servicesSearch"
 const algoliasearch = require('algoliasearch');
 
+const appID = process.env.APP_ID
+const appSearchKey = process.env.SEARCH_KEY
+const Index = process.env.INDEX_KEY
 
-const client = algoliasearch('O4UAD24SWB', '375899b9899e56201c71217f578111d3');
-const index = client.initIndex('comicsIndex');
+const client = algoliasearch(appID, appSearchKey);
+const index = client.initIndex(Index);
 
 type Data = {
   hits : any

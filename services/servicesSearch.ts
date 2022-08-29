@@ -1,7 +1,13 @@
 const algoliasearch = require('algoliasearch');
 
-const client = algoliasearch('O4UAD24SWB', '375899b9899e56201c71217f578111d3');
-const index = client.initIndex('comicsIndex');
+const appID = process.env.APP_ID
+const appSearchKey = process.env.SEARCH_KEY
+const Index = process.env.INDEX_KEY
+
+
+const client = algoliasearch("O4UAD24SWB", "b3336fe61bee949c1a479b94396a233c");
+const index = client.initIndex("comicsIndex");
+
 
 type data = {
   query: string
