@@ -4,11 +4,24 @@ import fs from 'fs/promises'
 import Layout from '../components/Layout'
 import path from "path"
 import Footer from '../components/footer'
+import Head from 'next/head'
 
 const Home: NextPage = ({ latestComics } ) => {
 
   return (
     <>
+      <Head>
+          <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://comicxkcd.vercel.app/" />
+          <meta property="og:title" content="XKCD" />
+          <meta property="og:description" content="Comics" />
+        <meta property="og:image" content="https://imgs.xkcd.com/comics/cloud_swirls.png" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        <meta property="og:image" content="https://imgs.xkcd.com/comics/cloud_swirls.png" />
+          <meta property="og:image:width" content="400" />
+          <meta property="og:image:height" content="400" />
+      </Head>
       <Layout>
         <ComicHome latestComics={latestComics} />
         <Footer></Footer>
