@@ -20,6 +20,7 @@ interface Comics {
 }
 
 const Search = ({ query }: props) => {
+
   return (
     <div>
       {query.map(comics => {

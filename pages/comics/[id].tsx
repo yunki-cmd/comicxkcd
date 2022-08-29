@@ -5,6 +5,7 @@ import { readFile, stat} from "fs/promises"
 import Link from "next/link"
 import Layout from "../../components/Layout"
 import Footer from "../../components/footer"
+import { useProgressiveImg } from "../../hooks/blurImg"
 
 interface Props{
   id: string
@@ -29,6 +30,8 @@ interface Props{
 
 const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextPage }) => {
 
+  const [src, { blur }] = useProgressiveImg("../../public/loading.svg", content.img)
+
   return (
     <>
       <Head>
@@ -38,7 +41,14 @@ const ComicId: NextPage<Props> = ({ id, content, prevID, nextId, PrevPage, nextP
       </Head>
       <Layout>
         <div className="flex flex-col justify-start items-center mt-24 min-h-screen">
-          <img src={content.img} alt={content.alt} />
+          <img
+            src={src}
+            alt={content.alt}
+            style={{
+              filter: blur ? "blur(20px)" : "none",
+              transition: blur ? "none" : "filter 0.3s ease-out"
+            }}
+          />
           <div className="w-1/2 mt-12 flex flex-row justify-evenly gap-10">
             {PrevPage === 'fulfilled' &&
               <Link href={`/comics/${prevID}`}>
